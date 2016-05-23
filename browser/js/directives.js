@@ -39,9 +39,7 @@ juke.directive('albumList', function(){
 		scope: {
 			albums: '='
 		}
-
 	}
-
 });
 
 juke.directive('songTable', function(PlayerFactory){
@@ -71,7 +69,32 @@ juke.directive('songTable', function(PlayerFactory){
             return PlayerFactory.isPlaying() && PlayerFactory.getCurrentSong() === song;
           };
         }
-
     }
+});
+
+juke.directive('doubleClick', function(PlayerFactory){
+  return {
+    restrict: 'A',
+    scope: {
+      doubleClick: '&',
+    },
+    link: function(scope,element){
+      
+      element.on('dblclick',function(e){
+        scope.doubleClick();
+
+      });
+
+      // scope.toggle = function (song) {
+      //       if (song !== PlayerFactory.getCurrentSong()) {
+      //         PlayerFactory.start(song, scope.songList);
+      //       } else if ( PlayerFactory.isPlaying() ) {
+      //         PlayerFactory.pause();
+      //       } else {
+      //         PlayerFactory.resume();
+      //       }
+      //     };
+    }
+  }
 
 });
